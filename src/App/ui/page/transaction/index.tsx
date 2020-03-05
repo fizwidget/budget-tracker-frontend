@@ -1,4 +1,5 @@
-import React from "react";
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 
 interface Props {
   description: String;
@@ -6,7 +7,11 @@ interface Props {
 }
 
 export const Transaction = ({ description, amount }: Props) => (
-  <div>
+  <div
+    css={css`
+      padding: 24px;
+    `}
+  >
     <span>{description}</span>
     <span>{amount}</span>
   </div>
