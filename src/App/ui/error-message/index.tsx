@@ -8,7 +8,7 @@ interface Props {
   error: ApolloError;
 }
 
-export const ErrorNotification = ({
+export const ErrorMessage = ({
   title,
   error: { networkError, graphQLErrors }
 }: Props) => (

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTransactions, Transaction } from "../../service/transactions";
 import DyanmicTable from "@atlaskit/dynamic-table";
-import { ErrorNotification } from "../error-notification";
+import { ErrorMessage } from "../error-message";
 
 const tableHeader = {
   cells: [
@@ -15,7 +15,7 @@ const tableHeader = {
 const formatCurrency = (currency: number): string =>
   `${currency < 0 ? "-" : ""}$${Math.abs(currency)}`;
 
-const toTableRows = (transactions: Transaction[]) =>
+const asTableRows = (transactions: Transaction[]) =>
   transactions.map(({ description, amount, category, account }) => ({
     cells: [
       { content: description },
@@ -31,13 +31,13 @@ export const Transactions = () => {
   return (
     <>
       {error && (
-        <ErrorNotification title="Error loading transactions" error={error} />
+        <ErrorMessage title="Error loading transactions" error={error} />
       )}
       <DyanmicTable
         caption="Transactions"
         isLoading={loading}
         head={tableHeader}
-        rows={transactions && toTableRows(transactions)}
+        rows={transactions && asTableRows(transactions)}
       />
     </>
   );
