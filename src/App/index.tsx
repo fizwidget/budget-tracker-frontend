@@ -1,13 +1,15 @@
 import React from "react";
 import { ApolloClient, HttpLink, InMemoryCache } from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { Transactions } from "./ui/main-content";
 import Page, { Grid, GridColumn } from "@atlaskit/page";
 import { css, Global } from "@emotion/core";
+import { Categories } from "./ui/categories";
+import { Transactions } from "./ui/transactions";
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:8080/graphql" }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  resolvers: {}
 });
 
 const pageStyles = css`
@@ -25,6 +27,7 @@ export const App = () => (
           <h1>Budget Tracker</h1>
         </GridColumn>
         <GridColumn medium={12}>
+          <Categories />
           <Transactions />
         </GridColumn>
       </Grid>

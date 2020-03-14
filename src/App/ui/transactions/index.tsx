@@ -1,7 +1,8 @@
 import React from "react";
-import { useTransactions, Transaction } from "../../service/transactions";
 import DyanmicTable from "@atlaskit/dynamic-table";
+import { useTransactions, Transaction } from "../../service/transactions";
 import { ErrorMessage } from "../error-message";
+import { useSelectedCategory } from "../../service/selected-category";
 
 const tableHeader = {
   cells: [
@@ -15,7 +16,7 @@ const tableHeader = {
 const formatCurrency = (currency: number): string =>
   `${currency < 0 ? "-" : ""}$${Math.abs(currency)}`;
 
-const asTableRows = (transactions: Transaction[]) =>
+const toTableRows = (transactions: Transaction[]) =>
   transactions.map(({ description, amount, category, account }) => ({
     cells: [
       { content: description },
@@ -26,7 +27,14 @@ const asTableRows = (transactions: Transaction[]) =>
   }));
 
 export const Transactions = () => {
-  const { data: transactions, error, loading } = useTransactions();
+  const [selectedCategory] = useSelectedCategory();
+  console.log(selectedCategory);
+  const transactionsFilter = {
+    categoryIds: selectedCategory ? [selectedCategory] : []
+  };
+  const { data: transactions, error, loading } = useTransactions(
+    transactionsFilter
+  );
 
   return (
     <>
@@ -37,7 +45,7 @@ export const Transactions = () => {
         caption="Transactions"
         isLoading={loading}
         head={tableHeader}
-        rows={transactions && asTableRows(transactions)}
+        rows={transactions && toTableRows(transactions)}
       />
     </>
   );
