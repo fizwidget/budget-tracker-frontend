@@ -30,12 +30,12 @@ interface Category {
   name: string;
 }
 
-interface Transaction {
+export interface Transaction {
   id: string;
   description: string;
   amount: number;
-  account: Account;
-  category: Category;
+  account: Account | null;
+  category: Category | null;
 }
 
 interface Response {
@@ -43,7 +43,7 @@ interface Response {
 }
 
 export const useTransactions = (): ApolloCurrentQueryResult<Transaction[]> => {
-  const result = useQuery<Response>(SAVINGS_RATE);
+  const result = useQuery<Response>(SAVINGS_RATE, { errorPolicy: "all" });
   return {
     ...result,
     data: result.data?.transactions
