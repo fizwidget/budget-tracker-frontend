@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "budget-tracker-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -78,7 +78,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "schema:download": "apollo schema:download --endpoint=http://localhost:8080/graphql",
+    "schema:types:generate": "yarn schema:download && apollo codegen:generate --localSchemaFile=schema.json --target=typescript --includes=\"src/**/*.ts*\" --tagName=gql --globalTypesFile=src/types/graphql-global-types.ts types"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -149,5 +151,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "apollo": "^2.26.0"
   }
 }

@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { gql, ApolloCurrentQueryResult } from "apollo-boost";
+import { GetCategories, GetCategories_categories } from "./types/GetCategories";
 
 const CATEGORIES_QUERY = gql`
-  query {
+  query GetCategories {
     categories {
       id
       name
@@ -10,19 +11,16 @@ const CATEGORIES_QUERY = gql`
   }
 `;
 
-export interface Category {
-  id: string;
-  name: string;
+interface Result {
+  categories: GetCategories_categories[];
 }
 
-type Response = {
-  categories: Category[];
-};
-
-export const useCategories = (): ApolloCurrentQueryResult<Category[]> => {
-  const result = useQuery<Response>(CATEGORIES_QUERY, { errorPolicy: "all" });
+export const useCategories = (): ApolloCurrentQueryResult<Result> => {
+  const result = useQuery<GetCategories>(CATEGORIES_QUERY, {
+    errorPolicy: "all"
+  });
   return {
     ...result,
-    data: result.data?.categories
+    data: result.data?.categories || undefined
   };
 };

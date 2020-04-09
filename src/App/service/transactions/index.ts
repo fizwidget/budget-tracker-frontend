@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql, ApolloCurrentQueryResult } from "apollo-boost";
 
 const TRANSACTIONS_QUERY = gql`
-  query($filter: TransactionsFilterInput) {
+  query($filter: TransactionsFilterInput) GetTransactions {
     transactions(filter: $filter) {
       id
       description

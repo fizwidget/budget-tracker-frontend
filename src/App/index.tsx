@@ -6,9 +6,16 @@ import { css, Global } from "@emotion/core";
 import { Categories } from "./ui/categories";
 import { Transactions } from "./ui/transactions";
 
+const typeDefs = gql`
+  extend type Query {
+    selectedCategory: String
+  }
+`;
+
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:8080/graphql" }),
   cache: new InMemoryCache(),
+  typeDefs,
   resolvers: {}
 });
 
