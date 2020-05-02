@@ -10,8 +10,8 @@ const tableHeader = {
     { content: "Description", shouldTruncate: true },
     { content: "Amount" },
     { content: "Category" },
-    { content: "Account" }
-  ]
+    { content: "Account" },
+  ],
 };
 
 interface TableRowProps {
@@ -41,7 +41,7 @@ const toTableRows = (
       setSelectCategory(isSelected ? undefined : id);
     return {
       cells: [{ content }],
-      onClick: toggleSelection
+      onClick: toggleSelection,
     };
   });
 

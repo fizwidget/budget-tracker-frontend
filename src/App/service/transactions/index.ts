@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql, ApolloCurrentQueryResult } from "apollo-boost";
 
 const TRANSACTIONS_QUERY = gql`
-  query($filter: TransactionsFilterInput) GetTransactions {
+  query GetTransactions($filter: TransactionsFilterInput) {
     transactions(filter: $filter) {
       id
       description
@@ -53,14 +53,14 @@ interface Variables {
 }
 
 export const useTransactions = ({
-  categoryIds
+  categoryIds,
 }: Filter): ApolloCurrentQueryResult<Transaction[]> => {
   const result = useQuery<Response, Variables>(TRANSACTIONS_QUERY, {
     variables: { filter: { categories: categoryIds } },
-    errorPolicy: "all"
+    errorPolicy: "all",
   });
   return {
     ...result,
-    data: result.data?.transactions
+    data: result.data?.transactions,
   };
 };

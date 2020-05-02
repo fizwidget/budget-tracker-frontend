@@ -1,6 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
 import { gql, ApolloCurrentQueryResult } from "apollo-boost";
-import { GetCategories, GetCategories_categories } from "./types/GetCategories";
+import {
+  GetCategories,
+  GetCategories_categories as Category,
+} from "./types/GetCategories";
+
+// Borked in old TypeScript version :/
+export type { Category };
 
 const CATEGORIES_QUERY = gql`
   query GetCategories {
@@ -11,16 +17,12 @@ const CATEGORIES_QUERY = gql`
   }
 `;
 
-interface Result {
-  categories: GetCategories_categories[];
-}
-
-export const useCategories = (): ApolloCurrentQueryResult<Result> => {
+export const useCategories = (): ApolloCurrentQueryResult<Category[]> => {
   const result = useQuery<GetCategories>(CATEGORIES_QUERY, {
-    errorPolicy: "all"
+    errorPolicy: "all",
   });
   return {
     ...result,
-    data: result.data?.categories || undefined
+    data: result.data?.categories || undefined,
   };
 };

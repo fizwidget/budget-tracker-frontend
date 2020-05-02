@@ -80,7 +80,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "schema:download": "apollo schema:download --endpoint=http://localhost:8080/graphql",
-    "schema:types:generate": "yarn schema:download && apollo codegen:generate --localSchemaFile=schema.json --target=typescript --includes=\"src/**/*.ts*\" --tagName=gql --globalTypesFile=src/types/graphql-global-types.ts types"
+    "schema:types:generate": "yarn schema:download && apollo codegen:generate --localSchemaFile=schema.json --target=typescript --globalTypesFile=src/types/graphql-global-types.ts types"
   },
   "eslintConfig": {
     "extends": "react-app"

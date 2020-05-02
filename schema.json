@@ -15,7 +15,7 @@
         "fields": [
           {
             "name": "transactions",
-            "description": " List transactions with an optional filter.\n ",
+            "description": "List transactions with an optional filter.",
             "args": [
               {
                 "name": "filter",
@@ -46,7 +46,7 @@
           },
           {
             "name": "categories",
-            "description": " List all categories.\n ",
+            "description": "List all categories.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -66,7 +66,7 @@
           },
           {
             "name": "accounts",
-            "description": " List all bank accounts.\n ",
+            "description": "List all bank accounts.",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -86,7 +86,7 @@
           },
           {
             "name": "savingsRate",
-            "description": " Calculate the savings rate (% of income that is saved/invested) for a particular time period.\n ",
+            "description": "Calculate the savings rate (% of income that is saved/invested) for a particular time period.",
             "args": [
               {
                 "name": "timeRange",
@@ -121,7 +121,7 @@
         "inputFields": [
           {
             "name": "categories",
-            "description": " Filter by categories.\n ",
+            "description": "Filter by categories.",
             "type": {
               "kind": "LIST",
               "name": null,
@@ -139,7 +139,7 @@
           },
           {
             "name": "timeRange",
-            "description": " Filter by a time range.\n ",
+            "description": "Filter by a time range.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TimeRangeInput",
@@ -170,7 +170,7 @@
         "inputFields": [
           {
             "name": "startDate",
-            "description": " Start date for the time period (inclusive).\n ",
+            "description": "Start date for the time period (inclusive).",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -180,7 +180,7 @@
           },
           {
             "name": "endDate",
-            "description": " End date for the time period (inclusive).\n ",
+            "description": "End date for the time period (inclusive).",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -210,7 +210,7 @@
         "fields": [
           {
             "name": "id",
-            "description": " Opaque identifier.\n ",
+            "description": "Opaque identifier.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -226,7 +226,7 @@
           },
           {
             "name": "date",
-            "description": " Date the transaction occured on (including timezone offset).\n\n TODO: Specify exact format.\n ",
+            "description": "Date the transaction occured on (including timezone offset).\n\nTODO: Specify exact format.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -242,7 +242,7 @@
           },
           {
             "name": "description",
-            "description": " Description of the transaction, as per the bank record.\n ",
+            "description": "Description of the transaction, as per the bank record.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -258,7 +258,7 @@
           },
           {
             "name": "amount",
-            "description": " Dollar amount of the transaction.\n\n Positive values for money coming in, negative values for money going out.\n ",
+            "description": "Dollar amount of the transaction.\n\nPositive values for money coming in, negative values for money going out.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -274,7 +274,7 @@
           },
           {
             "name": "account",
-            "description": " Account the transaction occured in (e.g. \"Savings\").\n ",
+            "description": "Account the transaction occured in (e.g. \"Savings\").",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -286,7 +286,7 @@
           },
           {
             "name": "category",
-            "description": " Category the transaction falls into (`null` if the transaction has not been categorised).\n ",
+            "description": "Category the transaction falls into (`null` if the transaction has not been categorised).",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -319,7 +319,7 @@
         "fields": [
           {
             "name": "id",
-            "description": " Opaque identifier.\n ",
+            "description": "Opaque identifier.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -335,7 +335,7 @@
           },
           {
             "name": "name",
-            "description": " Name of the account, e.g. \"Savings\".\n ",
+            "description": "Name of the account, e.g. \"Savings\".",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -362,7 +362,7 @@
         "fields": [
           {
             "name": "id",
-            "description": " Opaque identifier.\n ",
+            "description": "Opaque identifier.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -378,7 +378,7 @@
           },
           {
             "name": "name",
-            "description": " Category name, e.g. \"Transport\".\n ",
+            "description": "Category name, e.g. \"Transport\".",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -405,7 +405,7 @@
         "fields": [
           {
             "name": "createAccount",
-            "description": " Create an account that transactions occur in.\n ",
+            "description": "Create an account that transactions occur in.",
             "args": [
               {
                 "name": "input",
@@ -432,7 +432,7 @@
           },
           {
             "name": "createCategory",
-            "description": " Create a category that transactions can be organised into.\n ",
+            "description": "Create a category that transactions can be organised into.",
             "args": [
               {
                 "name": "input",
@@ -459,7 +459,7 @@
           },
           {
             "name": "recordTransactions",
-            "description": " Record a series of transactions.\n\n Transactions that have already been recorded will be ignored.\n ",
+            "description": "Record a series of transactions.\n\nTransactions that have already been recorded will be ignored.",
             "args": [
               {
                 "name": "input",
@@ -486,7 +486,7 @@
           },
           {
             "name": "categoriseTransaction",
-            "description": " Categorise a transaction.\n ",
+            "description": "Categorise a transaction.",
             "args": [
               {
                 "name": "input",
@@ -525,7 +525,7 @@
         "inputFields": [
           {
             "name": "id",
-            "description": " Account identifier, as specified by the bank.\n ",
+            "description": "Account identifier, as specified by the bank.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -539,7 +539,7 @@
           },
           {
             "name": "name",
-            "description": " Name of the account, e.g. \"Savings\".\n ",
+            "description": "Name of the account, e.g. \"Savings\".",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -607,7 +607,7 @@
           },
           {
             "name": "account",
-            "description": " The created account.\n ",
+            "description": "The created account.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -636,7 +636,7 @@
         "fields": [
           {
             "name": "success",
-            "description": " True of the mutation succeeded, false if it failed.\n ",
+            "description": "True of the mutation succeeded, false if it failed.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -652,7 +652,7 @@
           },
           {
             "name": "message",
-            "description": " A human-readable message to assist with debugging.\n ",
+            "description": "A human-readable message to assist with debugging.",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -668,7 +668,7 @@
           },
           {
             "name": "errorType",
-            "description": " A machine-readable enum to allow frontends to disambiguate different types of errors.\n ",
+            "description": "A machine-readable enum to allow frontends to disambiguate different types of errors.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -723,7 +723,7 @@
         "inputFields": [
           {
             "name": "name",
-            "description": " Category name, e.g. \"Transport\".\n ",
+            "description": "Category name, e.g. \"Transport\".",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -791,7 +791,7 @@
           },
           {
             "name": "category",
-            "description": " The created category.\n ",
+            "description": "The created category.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -821,7 +821,7 @@
         "inputFields": [
           {
             "name": "csv",
-            "description": " CSV transaction record (ING format).\n ",
+            "description": "CSV transaction record (ING format).",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -889,7 +889,7 @@
           },
           {
             "name": "transactions",
-            "description": " List transactions with an optional filter (including the newly created ones).\n ",
+            "description": "List transactions with an optional filter (including the newly created ones).",
             "args": [
               {
                 "name": "filter",
@@ -938,7 +938,7 @@
         "inputFields": [
           {
             "name": "transactionId",
-            "description": " The transaction to categorise.\n ",
+            "description": "The transaction to categorise.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -952,7 +952,7 @@
           },
           {
             "name": "categoryId",
-            "description": " The category to put the transaction into.\n ",
+            "description": "The category to put the transaction into.",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1020,7 +1020,7 @@
           },
           {
             "name": "transaction",
-            "description": " The categorised transaction.\n ",
+            "description": "The categorised transaction.",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -1842,7 +1842,7 @@
     "directives": [
       {
         "name": "include",
-        "description": "Directs the executor to include this field or fragment only when the `if` argument is true",
+        "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
         "locations": [
           "FIELD",
           "FRAGMENT_SPREAD",
@@ -1867,7 +1867,7 @@
       },
       {
         "name": "skip",
-        "description": "Directs the executor to skip this field or fragment when the `if`'argument is true.",
+        "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
         "locations": [
           "FIELD",
           "FRAGMENT_SPREAD",
@@ -1891,16 +1891,8 @@
         ]
       },
       {
-        "name": "defer",
-        "description": "This directive allows results to be deferred during execution",
-        "locations": [
-          "FIELD"
-        ],
-        "args": []
-      },
-      {
         "name": "deprecated",
-        "description": null,
+        "description": "Marks an element of a GraphQL schema as no longer supported.",
         "locations": [
           "FIELD_DEFINITION",
           "ENUM_VALUE"
@@ -1908,7 +1900,7 @@
         "args": [
           {
             "name": "reason",
-            "description": null,
+            "description": "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax (as specified by [CommonMark](https://commonmark.org/).",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -1917,6 +1909,14 @@
             "defaultValue": "\"No longer supported\""
           }
         ]
+      },
+      {
+        "name": "defer",
+        "description": "This directive allows results to be deferred during execution",
+        "locations": [
+          "FIELD"
+        ],
+        "args": []
       }
     ]
   }

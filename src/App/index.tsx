@@ -1,5 +1,5 @@
 import React from "react";
-import { ApolloClient, HttpLink, InMemoryCache } from "apollo-boost";
+import { ApolloClient, HttpLink, InMemoryCache, gql } from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Page, { Grid, GridColumn } from "@atlaskit/page";
 import { css, Global } from "@emotion/core";
@@ -16,7 +16,7 @@ const client = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:8080/graphql" }),
   cache: new InMemoryCache(),
   typeDefs,
-  resolvers: {}
+  resolvers: {},
 });
 
 const pageStyles = css`

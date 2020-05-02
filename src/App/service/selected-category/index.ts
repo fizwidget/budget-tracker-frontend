@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import { GetSelectedCategory } from "./types/GetSelectedCategory";
 
 const SELECTED_CATEGORY_QUERY = gql`
   query GetSelectedCategory {
@@ -13,10 +14,14 @@ type UseSelectedCategory = () => [
 ];
 
 export const useSelectedCategory: UseSelectedCategory = () => {
-  const { data, client } = useQuery<Response>(SELECTED_CATEGORY_QUERY);
+  const { data, client } = useQuery<GetSelectedCategory>(
+    SELECTED_CATEGORY_QUERY
+  );
 
   const setSelectedCategory = (categoryId: string | undefined) => {
-    client.writeData({ data: { selectedCategory: categoryId || null } });
+    client.writeData<GetSelectedCategory>({
+      data: { selectedCategory: categoryId || null },
+    });
   };
 
   return [data?.selectedCategory || undefined, setSelectedCategory];
