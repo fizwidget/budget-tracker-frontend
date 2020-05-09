@@ -1,28 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
-import { gql, ApolloCurrentQueryResult } from "apollo-boost";
-import {
-  GetCategories,
-  GetCategories_categories as Category,
-} from "./types/GetCategories";
+import { GetCategories } from "./types/GetCategories";
+import { ServiceResult } from "../../common/types/service-result";
+import { Category } from "../../common/types/category";
+import { CATEGORIES_QUERY } from "./gql";
+import { transformResult } from "./utils";
 
-// Borked in old TypeScript version :/
-export type { Category };
-
-const CATEGORIES_QUERY = gql`
-  query GetCategories {
-    categories {
-      id
-      name
-    }
-  }
-`;
-
-export const useCategories = (): ApolloCurrentQueryResult<Category[]> => {
-  const result = useQuery<GetCategories>(CATEGORIES_QUERY, {
-    errorPolicy: "all",
-  });
-  return {
-    ...result,
-    data: result.data?.categories || undefined,
-  };
+export const useCategories = (): ServiceResult<Category[]> => {
+  const result = useQuery<GetCategories>(CATEGORIES_QUERY);
+  return transformResult(result);
 };

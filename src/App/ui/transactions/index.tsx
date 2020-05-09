@@ -1,6 +1,7 @@
 import React from "react";
 import DyanmicTable from "@atlaskit/dynamic-table";
-import { useTransactions, Transaction } from "../../service/transactions";
+import { useTransactions } from "../../service/transactions";
+import { Transaction } from "../../common/types/transaction";
 import { ErrorMessage } from "../error-message";
 import { useSelectedCategory } from "../../service/selected-category";
 
@@ -9,8 +10,8 @@ const tableHeader = {
     { content: "Description", shouldTruncate: true },
     { content: "Amount" },
     { content: "Category" },
-    { content: "Account" }
-  ]
+    { content: "Account" },
+  ],
 };
 
 const formatCurrency = (currency: number): string =>
@@ -22,15 +23,15 @@ const toTableRows = (transactions: Transaction[]) =>
       { content: description },
       { content: formatCurrency(amount) },
       { content: category ? category.name : "Uncategorised" },
-      { content: account ? account.name : "Unknown" }
-    ]
+      { content: account ? account.name : "Unknown" },
+    ],
   }));
 
 export const Transactions = () => {
   const [selectedCategory] = useSelectedCategory();
   console.log("Selected category: ", selectedCategory);
   const transactionsFilter = {
-    categoryIds: selectedCategory ? [selectedCategory] : []
+    categoryIds: selectedCategory ? [selectedCategory] : [],
   };
   const { data: transactions, error, loading } = useTransactions(
     transactionsFilter
@@ -43,6 +44,7 @@ export const Transactions = () => {
       )}
       <DyanmicTable
         caption="Transactions"
+        emptyView={<span>No transactions.</span>}
         isLoading={loading}
         head={tableHeader}
         rows={transactions && toTableRows(transactions)}

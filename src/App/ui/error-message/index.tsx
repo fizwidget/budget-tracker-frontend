@@ -1,33 +1,35 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { ApolloError } from "apollo-boost";
+import { isApolloError } from "apollo-boost";
 import SectionMessage from "@atlaskit/section-message";
 
 interface Props {
   title: string;
-  error: ApolloError;
+  error: Error;
 }
 
-export const ErrorMessage = ({
-  title,
-  error: { networkError, graphQLErrors }
-}: Props) => (
-  <SectionMessage appearance="error">
-    <div
-      css={css`
-        font-weight: bold;
-        padding-bottom: 8px;
-      `}
-    >
-      {title}
-    </div>
-    {networkError && networkError.message}
-    {graphQLErrors && (
-      <ul>
-        {graphQLErrors.map(({ message }) => (
-          <li>{message}</li>
-        ))}
-      </ul>
-    )}
-  </SectionMessage>
-);
+export const ErrorMessage = ({ title, error }: Props) => {
+  const { networkError, graphQLErrors } = isApolloError(error)
+    ? error
+    : { networkError: undefined, graphQLErrors: undefined };
+  return (
+    <SectionMessage appearance="error">
+      <div
+        css={css`
+          font-weight: bold;
+          padding-bottom: 8px;
+        `}
+      >
+        {title}
+      </div>
+      {networkError?.message ?? error.message}
+      {graphQLErrors && (
+        <ul>
+          {graphQLErrors.map(({ message }) => (
+            <li>{message}</li>
+          ))}
+        </ul>
+      )}
+    </SectionMessage>
+  );
+};

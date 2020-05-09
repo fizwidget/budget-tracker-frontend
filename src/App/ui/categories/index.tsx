@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import DynamicTable from "@atlaskit/dynamic-table";
-import { useCategories, Category } from "../../service/categories";
+import { useCategories } from "../../service/categories";
+import { Category } from "../../common/types/category";
 import { ErrorMessage } from "../error-message";
 import { useSelectedCategory } from "../../service/selected-category";
 
@@ -54,7 +55,7 @@ export const Categories = () => {
       {error && <ErrorMessage title="Error loading categories" error={error} />}
       <DynamicTable
         caption="Categories"
-        emptyView={<span>No transactions!</span>}
+        emptyView={<span>No categories.</span>}
         isLoading={loading}
         head={tableHeader}
         rows={
