@@ -1,9 +1,17 @@
+/**
+ * Client service result.
+ */
+
 export interface ClientServiceResult<T> {
   data: T;
   mutate: (data: T) => void;
 }
 
-export type ServiceResult<T> =
+/**
+ * Query service result.
+ */
+
+export type ServiceQueryResult<T> =
   | LoadingServiceResult<T>
   | SuccessServiceResult<T>
   | ErrorServiceResult<T>;
@@ -26,20 +34,29 @@ interface ErrorServiceResult<T> {
   error: Error;
 }
 
-export const loading = <T>(): ServiceResult<T> => ({
+export const loadingResult = <T>(): ServiceQueryResult<T> => ({
   loading: true,
   data: undefined,
   error: undefined,
 });
 
-export const error = <T>(error: Error): ServiceResult<T> => ({
+export const errorResult = <T>(error: Error): ServiceQueryResult<T> => ({
   loading: false,
   data: undefined,
   error,
 });
 
-export const success = <T>(data: T): ServiceResult<T> => ({
+export const successResult = <T>(data: T): ServiceQueryResult<T> => ({
   loading: false,
   data,
   error: undefined,
 });
+
+/**
+ * Mutation service result.
+ */
+
+export type ServiceMutationResult<MutationInput, MutationOutput> = [
+  (input: MutationInput) => void,
+  ServiceQueryResult<MutationOutput>
+];

@@ -5,10 +5,10 @@ import {
 } from "./__generated__/GetCategories";
 import { Category, toCategoryId } from "../../common/types/category";
 import {
-  ServiceResult,
-  loading,
-  success,
-  error,
+  ServiceQueryResult,
+  loadingResult,
+  successResult,
+  errorResult,
 } from "../../common/types/service-result";
 
 const transformCategory = (input: GetCategories_categories): Category => ({
@@ -18,17 +18,17 @@ const transformCategory = (input: GetCategories_categories): Category => ({
 
 export const transformResult = (
   result: QueryResult<GetCategories>
-): ServiceResult<Category[]> => {
+): ServiceQueryResult<Category[]> => {
   if (result.loading) {
-    return loading();
+    return loadingResult();
   }
   if (result.error) {
-    return error(result.error);
+    return errorResult(result.error);
   }
 
   const categories = result.data?.categories;
 
   return categories
-    ? success(categories.map(transformCategory))
-    : error(Error("No categories"));
+    ? successResult(categories.map(transformCategory))
+    : errorResult(Error("No categories"));
 };

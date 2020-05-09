@@ -74,7 +74,7 @@
     tslib "^1.9.3"
     use-memo-one "^1.1.1"
 
-"@atlaskit/button@^13.3.7", "@atlaskit/button@^13.3.9":
+"@atlaskit/button@^13.3.11", "@atlaskit/button@^13.3.7", "@atlaskit/button@^13.3.9":
   version "13.3.11"
   resolved "https://registry.yarnpkg.com/@atlaskit/button/-/button-13.3.11.tgz#a90faee9bc546721925038da688883cf6191e044"
   integrity sha512-2JM+ifeOIb9X/K0PWCM8uzyf9IflQbV7eZ7GdPZnxeyE4nLlQlO/dg4Nly8WCzDrXNoXPD1qMtjxIhAPiDzdSw==

@@ -5,6 +5,7 @@ import Page, { Grid, GridColumn } from "@atlaskit/page";
 import { css, Global } from "@emotion/core";
 import { Categories } from "./ui/categories";
 import { Transactions } from "./ui/transactions";
+import { Upload } from "./ui/upload";
 
 const typeDefs = gql`
   extend type Query {
@@ -34,6 +35,7 @@ export const App = () => (
           <h1>Budget Tracker</h1>
         </GridColumn>
         <GridColumn medium={12}>
+          <Upload />
           <Categories />
           <Transactions />
         </GridColumn>

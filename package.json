@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
+    "@atlaskit/button": "^13.3.11",
     "@atlaskit/dynamic-table": "^13.7.4",
     "@atlaskit/page": "^11.0.13",
     "@atlaskit/page-header": "^9.0.19",

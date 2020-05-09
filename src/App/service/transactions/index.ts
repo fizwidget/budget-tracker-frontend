@@ -1,20 +1,30 @@
 import { useQuery } from "@apollo/react-hooks";
 import { TRANSACTIONS_QUERY } from "./gql";
-import { ServiceResult } from "../../common/types/service-result";
+import { ServiceQueryResult } from "../../common/types/service-result";
 import { Transaction } from "../../common/types/transaction";
 import { CategoryId } from "../../common/types/category";
 import { transformResult } from "./utils";
+import {
+  GetTransactions,
+  GetTransactionsVariables,
+} from "./__generated__/GetTransactions";
 
 interface Filter {
   categoryIds: CategoryId[];
 }
 
-export const useTransactions = ({
-  categoryIds,
-}: Filter): ServiceResult<Transaction[]> => {
-  const result = useQuery<[]>(TRANSACTIONS_QUERY, {
-    variables: { filter: { categories: categoryIds } },
-    errorPolicy: "all",
-  });
+export const useTransactions = (
+  filter: Filter
+): ServiceQueryResult<Transaction[]> => {
+  const result = useQuery<GetTransactions, GetTransactionsVariables>(
+    TRANSACTIONS_QUERY,
+    {
+      variables: {
+        filter: {
+          categories: filter.categoryIds,
+        },
+      },
+    }
+  );
   return transformResult(result);
 };
