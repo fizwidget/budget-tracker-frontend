@@ -1,5 +1,8 @@
 import { QueryResult } from "@apollo/react-common";
-import { GetCategories, GetCategories_categories } from "./types/GetCategories";
+import {
+  GetCategories,
+  GetCategories_categories,
+} from "./__generated__/GetCategories";
 import { Category, toCategoryId } from "../../common/types/category";
 import {
   ServiceResult,

@@ -77,10 +77,11 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "yarn schema:types:generate && node scripts/build.js",
     "test": "node scripts/test.js",
     "schema:download": "apollo schema:download --endpoint=http://localhost:8080/graphql",
-    "schema:types:generate": "apollo codegen:generate --target=typescript --globalTypesFile=src/types/graphql-global-types.ts types"
+    "schema:types:generate": "apollo codegen:generate --target=typescript",
+    "schema:types:watch": "yarn schema:types:generate --watch"
   },
   "eslintConfig": {
     "extends": "react-app"

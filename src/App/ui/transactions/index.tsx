@@ -28,7 +28,7 @@ const toTableRows = (transactions: Transaction[]) =>
   }));
 
 export const Transactions = () => {
-  const [selectedCategory] = useSelectedCategory();
+  const { data: selectedCategory } = useSelectedCategory();
   console.log("Selected category: ", selectedCategory);
   const transactionsFilter = {
     categoryIds: selectedCategory ? [selectedCategory] : [],

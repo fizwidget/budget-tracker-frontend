@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import DynamicTable from "@atlaskit/dynamic-table";
 import { useCategories } from "../../service/categories";
-import { Category } from "../../common/types/category";
+import { Category, CategoryId } from "../../common/types/category";
 import { ErrorMessage } from "../error-message";
 import { useSelectedCategory } from "../../service/selected-category";
 
@@ -32,14 +32,13 @@ const TableRow = ({ content, isSelected }: TableRowProps) => (
 
 const toTableRows = (
   categories: Category[],
-  selectedCategory: string | undefined,
-  setSelectCategory: (categoryId: string | undefined) => void
+  selectedCategory: CategoryId | null,
+  setSelectCategory: (categoryId: CategoryId | null) => void
 ) =>
   categories.map(({ id, name }) => {
     const isSelected = id === selectedCategory;
     const content = <TableRow content={name} isSelected={isSelected} />;
-    const toggleSelection = () =>
-      setSelectCategory(isSelected ? undefined : id);
+    const toggleSelection = () => setSelectCategory(isSelected ? null : id);
     return {
       cells: [{ content }],
       onClick: toggleSelection,
@@ -48,7 +47,10 @@ const toTableRows = (
 
 export const Categories = () => {
   const { data: categories, loading, error } = useCategories();
-  const [selectedCategory, setSelectedCategory] = useSelectedCategory();
+  const {
+    data: selectedCategory,
+    mutate: setSelectedCategory,
+  } = useSelectedCategory();
 
   return (
     <div>

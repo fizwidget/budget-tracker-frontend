@@ -1,28 +1,27 @@
 import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-import { GetSelectedCategory } from "./types/GetSelectedCategory";
 
-const SELECTED_CATEGORY_QUERY = gql`
-  query GetSelectedCategory {
-    selectedCategory @client
-  }
-`;
+import { GetSelectedCategory } from "./__generated__/GetSelectedCategory";
+import { ClientServiceResult } from "../../common/types/service-result";
+import { CategoryId, toCategoryId } from "../../common/types/category";
+import { SELECTED_CATEGORY_QUERY } from "./gql";
 
-type UseSelectedCategory = () => [
-  string | undefined,
-  (categoryId: string | undefined) => void
-];
-
-export const useSelectedCategory: UseSelectedCategory = () => {
+export const useSelectedCategory = (): ClientServiceResult<CategoryId | null> => {
   const { data, client } = useQuery<GetSelectedCategory>(
     SELECTED_CATEGORY_QUERY
   );
 
-  const setSelectedCategory = (categoryId: string | undefined) => {
+  const setSelectedCategoryId = (categoryId: CategoryId | null) => {
     client.writeData<GetSelectedCategory>({
-      data: { selectedCategory: categoryId || null },
+      data: { selectedCategory: categoryId },
     });
   };
 
-  return [data?.selectedCategory || undefined, setSelectedCategory];
+  const selectedCategoryId = data?.selectedCategory
+    ? toCategoryId(data.selectedCategory)
+    : null;
+
+  return {
+    data: selectedCategoryId,
+    mutate: setSelectedCategoryId,
+  };
 };

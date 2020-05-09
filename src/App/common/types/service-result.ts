@@ -1,3 +1,8 @@
+export interface ClientServiceResult<T> {
+  data: T;
+  mutate: (data: T) => void;
+}
+
 export type ServiceResult<T> =
   | LoadingServiceResult<T>
   | SuccessServiceResult<T>
