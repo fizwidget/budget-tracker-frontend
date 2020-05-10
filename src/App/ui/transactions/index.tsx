@@ -22,8 +22,13 @@ const toTableRows = (transactions: Transaction[]) =>
     cells: [
       { content: description },
       { content: formatCurrency(amount) },
-      { content: category ? category.name : "Uncategorised" },
-      { content: account ? account.name : "Unknown" },
+      {
+        content:
+          category.tag === "uncategorised"
+            ? "Uncategorised"
+            : category.value.name,
+      },
+      { content: account.name },
     ],
   }));
 

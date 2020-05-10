@@ -21,10 +21,9 @@ export const toTransactionId = (value: string): TransactionId => {
 
 export interface Transaction {
   id: TransactionId;
-  name: string;
   description: string;
   date: Date;
   amount: Dollars;
   account: Account;
-  category: Category;
+  category: { tag: "categorised"; value: Category } | { tag: "uncategorised" };
 }
