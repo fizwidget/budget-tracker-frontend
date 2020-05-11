@@ -26,5 +26,6 @@ export const useTransactions = (
       },
     }
   );
+  console.log(result.client.cache);
   return transformResult(result);
 };

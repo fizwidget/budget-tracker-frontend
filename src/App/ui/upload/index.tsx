@@ -31,7 +31,7 @@ export const Upload = () => {
   const [upload, result] = useUpload();
   return (
     <>
-      {JSON.stringify(result.error?.message)}
+      {result.error && `Error message: ${result.error?.message}`}
       <Button type="file" onClick={() => fileInputRef.current?.click()}>
         Upload CSV
       </Button>
