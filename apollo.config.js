@@ -1,6 +1,6 @@
 module.exports = {
   client: {
-    includes: ["src/**/*.ts", "src/**/*.tsx"],
+    includes: ["src/**/*.{ts,tsx}"],
     service: {
       name: "budget-tracker",
       localSchemaFile: "./schema.json",

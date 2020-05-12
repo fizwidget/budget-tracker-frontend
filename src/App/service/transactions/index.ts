@@ -10,7 +10,7 @@ import {
 } from "./__generated__/GetTransactions";
 
 interface Filter {
-  categoryIds: CategoryId[];
+  categoryIds?: CategoryId[];
 }
 
 export const useTransactions = (
@@ -21,7 +21,7 @@ export const useTransactions = (
     {
       variables: {
         filter: {
-          categories: filter.categoryIds,
+          ...(filter.categoryIds ? { categories: filter.categoryIds } : {}),
         },
       },
     }

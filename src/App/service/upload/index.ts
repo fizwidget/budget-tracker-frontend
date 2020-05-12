@@ -22,9 +22,6 @@ export const useUpload = (): ServiceMutationResult<Input, void> => {
     UploadTransactionsVariables
   >(UPLOAD_TRANSACTIONS);
 
-  // Cache update!
-  // ...actually, shouldn't Apollo be able to figure that out for itself?
-  // It doesn't seem to at the moment, weird.
   const runMutation = ({ transactionsCsv }: Input) =>
     mutate({
       variables: {
@@ -33,32 +30,44 @@ export const useUpload = (): ServiceMutationResult<Input, void> => {
         },
       },
       update: (proxy, mutationResult) => {
-        // This works for now but it's kinda dodgy - the variables
-        // shouldn't be hardcoded. How can I use the most recent variables?
-        const previousTransactions = proxy.readQuery<
-          GetTransactions,
-          GetTransactionsVariables
-        >({
-          query: TRANSACTIONS_QUERY,
-          variables: {
-            filter: {
-              categories: [],
+        // The new transactions should be returned if:
+        // - We query for *all* transactions.
+        // - We query for uncategorised transactions (null).
+        const queryVariables: GetTransactionsVariables[] = [
+          { filter: { categories: [null] } },
+          { filter: {} },
+        ];
+
+        queryVariables.forEach((variables) => {
+          const previousResult = proxy.readQuery<
+            GetTransactions,
+            GetTransactionsVariables
+          >({
+            query: TRANSACTIONS_QUERY,
+            variables,
+          });
+
+          const previousTransactions = previousResult?.transactions;
+
+          const newTransactions =
+            mutationResult.data?.recordTransactions?.transactions;
+
+          if (previousTransactions == null || newTransactions == null) {
+            return;
+          }
+
+          const combinedTransactions = [
+            ...previousTransactions,
+            ...newTransactions,
+          ];
+
+          proxy.writeQuery<GetTransactions, GetTransactionsVariables>({
+            query: TRANSACTIONS_QUERY,
+            variables,
+            data: {
+              transactions: combinedTransactions,
             },
-          },
-        })?.transactions;
-        const newTransactions =
-          mutationResult.data?.recordTransactions?.transactions;
-        if (previousTransactions == null || newTransactions == null) {
-          return;
-        }
-        proxy.writeQuery<GetTransactions, GetTransactionsVariables>({
-          query: TRANSACTIONS_QUERY,
-          variables: {
-            filter: {
-              categories: [],
-            },
-          },
-          data: { transactions: [...previousTransactions, ...newTransactions] },
+          });
         });
       },
     });
