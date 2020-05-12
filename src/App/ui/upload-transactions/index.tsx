@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 import Button from "@atlaskit/button";
-import { useUpload } from "../../service/upload";
+import { useUpload } from "../../service/upload-transactions";
 
 type FileContent = string;
 
@@ -26,7 +26,7 @@ const createOnFileInputChange = (
     reader.readAsText(file);
   });
 
-export const Upload = () => {
+export const UploadTransactions = () => {
   const fileInputRef = createRef<HTMLInputElement>();
   const [upload, result] = useUpload();
   return (
