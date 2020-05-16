@@ -3,7 +3,7 @@ module.exports = {
     includes: ["src/**/*.{ts,tsx}"],
     service: {
       name: "budget-tracker",
-      localSchemaFile: "./schema.json",
+      url: "http://localhost:8080/graphql",
     },
   },
 };
