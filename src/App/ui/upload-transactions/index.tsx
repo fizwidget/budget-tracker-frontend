@@ -1,30 +1,7 @@
 import React, { createRef } from "react";
 import Button from "@atlaskit/button";
 import { useUpload } from "../../service/upload-transactions";
-
-type FileContent = string;
-
-const createOnFileInputChange = (
-  input: HTMLInputElement
-): Promise<FileContent> =>
-  new Promise<FileContent>((resolve, reject) => {
-    const file = input?.files?.[0];
-    if (!file) {
-      throw Error("No file");
-    }
-    const reader = new FileReader();
-    reader.onload = (content) => {
-      if (
-        content.target?.result &&
-        typeof content.target?.result === "string"
-      ) {
-        resolve(content.target.result);
-      } else {
-        reject(Error("Uh oh"));
-      }
-    };
-    reader.readAsText(file);
-  });
+import { createOnFileInputChange } from "./utils";
 
 export const UploadTransactions = () => {
   const fileInputRef = createRef<HTMLInputElement>();

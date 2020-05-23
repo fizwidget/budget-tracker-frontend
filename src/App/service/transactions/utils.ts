@@ -2,9 +2,9 @@ import { QueryResult } from "@apollo/react-common";
 import { Transaction, toTransactionId } from "../../common/types/transaction";
 import {
   ServiceQueryResult,
-  loadingResult,
-  errorResult,
-  successResult,
+  loading,
+  failure,
+  success,
 } from "../../common/types/service-result";
 import {
   GetTransactions,
@@ -54,13 +54,13 @@ export const transformResult = (
   result: QueryResult<GetTransactions>
 ): ServiceQueryResult<Transaction[]> => {
   if (result.loading) {
-    return loadingResult();
+    return loading();
   }
   if (result.error) {
-    return errorResult(result.error);
+    return failure(result.error);
   }
   if (!result.data?.transactions) {
-    return errorResult(Error("Missing transactions"));
+    return failure(Error("Missing transactions"));
   }
-  return successResult(result.data?.transactions?.map(transformTransaction));
+  return success(result.data?.transactions?.map(transformTransaction));
 };

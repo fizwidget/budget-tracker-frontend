@@ -8,49 +8,62 @@ export interface ClientServiceResult<T> {
 }
 
 /**
- * Query service result.
+ * General service result.
  */
 
-export type ServiceQueryResult<T> =
-  | LoadingServiceResult<T>
-  | SuccessServiceResult<T>
-  | ErrorServiceResult<T>;
-
-interface LoadingServiceResult<T> {
+interface Loading<T> {
   loading: true;
   data: undefined;
   error: undefined;
 }
 
-interface SuccessServiceResult<T> {
+interface Success<T> {
   loading: false;
   data: T;
   error: undefined;
 }
 
-interface ErrorServiceResult<T> {
+interface Failure<T> {
   loading: false;
   data: undefined;
   error: Error;
 }
 
-export const loadingResult = <T>(): ServiceQueryResult<T> => ({
+interface NotRunning<T> {
+  loading: false;
+  data: undefined;
+  error: undefined;
+}
+
+export const loading = <T>(): Loading<T> => ({
   loading: true,
   data: undefined,
   error: undefined,
 });
 
-export const errorResult = <T>(error: Error): ServiceQueryResult<T> => ({
+export const failure = <T>(error: Error): Failure<T> => ({
   loading: false,
   data: undefined,
   error,
 });
 
-export const successResult = <T>(data: T): ServiceQueryResult<T> => ({
+export const success = <T>(data: T): Success<T> => ({
   loading: false,
   data,
   error: undefined,
 });
+
+export const notRunning = <T>(): NotRunning<T> => ({
+  loading: false,
+  data: undefined,
+  error: undefined,
+});
+
+/**
+ * Query service result.
+ */
+
+export type ServiceQueryResult<T> = Loading<T> | Success<T> | Failure<T>;
 
 /**
  * Mutation service result.
@@ -58,5 +71,10 @@ export const successResult = <T>(data: T): ServiceQueryResult<T> => ({
 
 export type ServiceMutationResult<MutationInput, MutationOutput> = [
   (input: MutationInput) => void,
-  ServiceQueryResult<MutationOutput>
+  (
+    | Loading<MutationOutput>
+    | Success<MutationOutput>
+    | Failure<MutationOutput>
+    | NotRunning<MutationOutput>
+  )
 ];
