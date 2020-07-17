@@ -1,20 +1,20 @@
 import { QueryResult } from "@apollo/react-common";
-import { Transaction, toTransactionId } from "../../common/types/transaction";
+import { Transaction, toTransactionId } from "../../types/transaction";
 import {
   ServiceQueryResult,
   loading,
   failure,
   success,
-} from "../../common/types/service-result";
+} from "../../types/service-result";
 import {
   GetTransactions,
   GetTransactions_transactions,
   GetTransactions_transactions_account,
   GetTransactions_transactions_category,
 } from "./__generated__/GetTransactions";
-import { toDollars } from "../../common/types/dollars";
-import { Account, toAccountId } from "../../common/types/account";
-import { Category, toCategoryId } from "../../common/types/category";
+import { toDollars } from "../../types/dollars";
+import { Account, toAccountId } from "../../types/account";
+import { Category, toCategoryId } from "../../types/category";
 
 const transformAccount = (
   input: GetTransactions_transactions_account

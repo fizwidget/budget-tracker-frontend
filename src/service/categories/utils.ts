@@ -3,13 +3,13 @@ import {
   GetCategories,
   GetCategories_categories,
 } from "./__generated__/GetCategories";
-import { Category, toCategoryId } from "../../common/types/category";
+import { Category, toCategoryId } from "../../types/category";
 import {
   ServiceQueryResult,
   loading,
   success,
   failure,
-} from "../../common/types/service-result";
+} from "../../types/service-result";
 
 const transformCategory = (input: GetCategories_categories): Category => ({
   id: toCategoryId(input.id),

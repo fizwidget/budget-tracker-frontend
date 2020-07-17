@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
 
 import { GetSelectedCategory } from "./__generated__/GetSelectedCategory";
-import { ClientServiceResult } from "../../common/types/service-result";
-import { CategoryId, toCategoryId } from "../../common/types/category";
+import { ClientServiceResult } from "../../types/service-result";
+import { CategoryId, toCategoryId } from "../../types/category";
 import { SELECTED_CATEGORY_QUERY } from "./gql";
 
 export const useSelectedCategory = (): ClientServiceResult<CategoryId | null> => {

@@ -6,7 +6,7 @@ import {
   loading,
   failure,
   success,
-} from "../../common/types/service-result";
+} from "../../types/service-result";
 import { UploadTransactions } from "./__generated__/UploadTransactions";
 import {
   GetTransactions,

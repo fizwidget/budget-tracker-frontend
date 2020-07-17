@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { GetCategories } from "./__generated__/GetCategories";
-import { ServiceQueryResult } from "../../common/types/service-result";
-import { Category } from "../../common/types/category";
+import { ServiceQueryResult } from "../../types/service-result";
+import { Category } from "../../types/category";
 import { CATEGORIES_QUERY } from "./gql";
 import { transformResult } from "./utils";
 

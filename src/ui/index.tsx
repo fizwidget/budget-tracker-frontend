@@ -3,9 +3,9 @@ import { ApolloClient, HttpLink, InMemoryCache, gql } from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Page, { Grid, GridColumn } from "@atlaskit/page";
 import { css, jsx, Global } from "@emotion/core";
-import { Categories } from "./ui/categories";
-import { Transactions } from "./ui/transactions";
-import { UploadTransactions } from "./ui/upload-transactions";
+import { Categories } from "./categories";
+import { Transactions } from "./transactions";
+import { UploadTransactions } from "./upload-transactions";
 
 const typeDefs = gql`
   extend type Query {

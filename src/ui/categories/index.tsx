@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import DynamicTable from "@atlaskit/dynamic-table";
 import { useCategories } from "../../service/categories";
-import { Category, CategoryId } from "../../common/types/category";
+import { Category, CategoryId } from "../../types/category";
 import { ErrorMessage } from "../error-message";
 import { useSelectedCategory } from "../../service/selected-category";
 

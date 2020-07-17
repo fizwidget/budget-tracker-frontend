@@ -1,7 +1,7 @@
 import React from "react";
 import DyanmicTable from "@atlaskit/dynamic-table";
 import { useTransactions } from "../../service/transactions";
-import { Transaction } from "../../common/types/transaction";
+import { Transaction } from "../../types/transaction";
 import { ErrorMessage } from "../error-message";
 import { useSelectedCategory } from "../../service/selected-category";
 
