@@ -2,13 +2,19 @@ import React, { createRef } from "react";
 import Button from "@atlaskit/button";
 import { useUpload } from "../../service/upload-transactions";
 import { createOnFileInputChange } from "./utils";
+import { ErrorMessage } from "../error-message";
 
 export const UploadTransactions = () => {
   const fileInputRef = createRef<HTMLInputElement>();
   const [upload, result] = useUpload();
   return (
     <>
-      {result.error && `Error message: ${result.error?.message}`}
+      {result.error && (
+        <ErrorMessage
+          title="Failed to record transactions"
+          error={result.error}
+        />
+      )}
       <Button type="file" onClick={() => fileInputRef.current?.click()}>
         Upload CSV
       </Button>
