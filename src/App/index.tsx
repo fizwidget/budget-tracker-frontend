@@ -1,8 +1,8 @@
-import React from "react";
+/** @jsx jsx */
 import { ApolloClient, HttpLink, InMemoryCache, gql } from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Page, { Grid, GridColumn } from "@atlaskit/page";
-import { css, Global } from "@emotion/core";
+import { css, jsx, Global } from "@emotion/core";
 import { Categories } from "./ui/categories";
 import { Transactions } from "./ui/transactions";
 import { UploadTransactions } from "./ui/upload-transactions";
@@ -32,7 +32,16 @@ export const App = () => (
     <Page>
       <Grid>
         <GridColumn medium={12}>
-          <h1>Budget Tracker</h1>
+          <h1
+            css={css`
+              text-align: center;
+              color: deeppink;
+              text-shadow: 5px 3px papayawhip;
+              font-size: 64px;
+            `}
+          >
+            Budget Tracker
+          </h1>
         </GridColumn>
         <GridColumn medium={12}>
           <UploadTransactions />
