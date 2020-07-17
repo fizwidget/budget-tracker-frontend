@@ -32,7 +32,12 @@ export const transformResult = (
   return failure(Error(result.data?.recordTransactions?.message));
 };
 
-export const updateCache = (proxy: DataProxy, mutationResult: FetchResult) => {
+export const updateCache = (
+  proxy: DataProxy,
+  mutationResult: FetchResult<UploadTransactions>
+) => {
+  debugger;
+
   // The new transactions should be returned if:
   // - We query for *all* transactions.
   // - We query for uncategorised transactions (null).
@@ -41,25 +46,42 @@ export const updateCache = (proxy: DataProxy, mutationResult: FetchResult) => {
     { filter: {} },
   ];
 
+  const newTransactions = mutationResult.data?.recordTransactions?.transactions;
+
+  if (newTransactions == null) {
+    return;
+  }
+
   queryVariables.forEach((variables) => {
-    const previousResult = proxy.readQuery<
-      GetTransactions,
-      GetTransactionsVariables
-    >({
-      query: TRANSACTIONS_QUERY,
-      variables,
-    });
-
-    const previousTransactions = previousResult?.transactions;
-
-    const newTransactions =
-      mutationResult.data?.recordTransactions?.transactions;
-
-    if (previousTransactions == null || newTransactions == null) {
+    let previousResult = null;
+    try {
+      previousResult = proxy.readQuery<
+        GetTransactions,
+        GetTransactionsVariables
+      >({
+        query: TRANSACTIONS_QUERY,
+        variables,
+      });
+    } catch (error) {
+      // Not in cache
       return;
     }
 
-    const combinedTransactions = [...previousTransactions, ...newTransactions];
+    const previousTransactions = previousResult?.transactions;
+
+    if (previousTransactions == null) {
+      return;
+    }
+
+    // TODO: Remove duplicate elimination when server only returns new transactions.
+    const combinedTransactions = Array.from(
+      new Map(
+        [...previousTransactions, ...newTransactions].map((transaction) => [
+          transaction.id,
+          transaction,
+        ])
+      ).values()
+    );
 
     proxy.writeQuery<GetTransactions, GetTransactionsVariables>({
       query: TRANSACTIONS_QUERY,
