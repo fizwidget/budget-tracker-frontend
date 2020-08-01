@@ -1,23 +1,30 @@
 /** @jsx jsx */
-import { ApolloClient, HttpLink, InMemoryCache, gql } from "apollo-boost";
-import { ApolloProvider } from "@apollo/react-hooks";
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
 import Page, { Grid, GridColumn } from "@atlaskit/page";
 import { css, jsx, Global } from "@emotion/core";
 import { Categories } from "./categories";
 import { Transactions } from "./transactions";
 import { UploadTransactions } from "./upload-transactions";
+import { selectedCategoryTypePolicy } from "../controllers/selected-category";
 
-const typeDefs = gql`
-  extend type Query {
-    selectedCategory: String
-  }
-`;
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        ...selectedCategoryTypePolicy,
+      },
+    },
+  },
+});
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:8080/graphql" }),
-  cache: new InMemoryCache(),
-  typeDefs,
-  resolvers: {},
+  cache,
 });
 
 const pageStyles = css`

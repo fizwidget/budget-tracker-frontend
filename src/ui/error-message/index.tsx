@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { isApolloError } from "apollo-boost";
+import { isApolloError } from "@apollo/client";
 import SectionMessage from "@atlaskit/section-message";
 
 interface Props {

@@ -11,7 +11,7 @@
     "schema:types:watch": "yarn schema:types:generate --watch"
   },
   "dependencies": {
-    "@apollo/react-hooks": "^3.1.5",
+    "@apollo/client": "^3.0.2",
     "@atlaskit/button": "^13.3.12",
     "@atlaskit/dynamic-table": "^13.7.5",
     "@atlaskit/page": "^11.0.13",
@@ -29,7 +29,6 @@
     "@types/react-dom": "^16.9.8",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
-    "apollo-boost": "^0.4.9",
     "babel-eslint": "10.1.0",
     "babel-jest": "^26.0.1",
     "babel-loader": "8.1.0",
@@ -85,7 +84,7 @@
     "workbox-webpack-plugin": "5.1.3"
   },
   "devDependencies": {
-    "apollo": "^2.27.4"
+    "apollo": "^2.30.1"
   },
   "eslintConfig": {
     "extends": "react-app"

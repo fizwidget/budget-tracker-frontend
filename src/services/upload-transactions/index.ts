@@ -1,5 +1,6 @@
+import { useMutation } from "@apollo/client";
+
 import { ServiceMutationResult } from "../../types/service-result";
-import { useMutation } from "@apollo/react-hooks";
 import { UPLOAD_TRANSACTIONS } from "./gql";
 import {
   UploadTransactionsVariables,

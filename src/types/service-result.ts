@@ -69,12 +69,13 @@ export type ServiceQueryResult<T> = Loading<T> | Success<T> | Failure<T>;
  * Mutation service result.
  */
 
+export type ServiceMutationState<T> =
+  | Loading<T>
+  | Success<T>
+  | Failure<T>
+  | NotRunning<T>;
+
 export type ServiceMutationResult<MutationInput, MutationOutput> = [
   (input: MutationInput) => void,
-  (
-    | Loading<MutationOutput>
-    | Success<MutationOutput>
-    | Failure<MutationOutput>
-    | NotRunning<MutationOutput>
-  )
+  ServiceMutationState<MutationOutput>
 ];

@@ -1,9 +1,9 @@
 import React from "react";
 import DyanmicTable from "@atlaskit/dynamic-table";
-import { useTransactions } from "../../service/transactions";
+import { useTransactions } from "../../services/transactions";
 import { Transaction } from "../../types/transaction";
 import { ErrorMessage } from "../error-message";
-import { useSelectedCategory } from "../../service/selected-category";
+import { useSelectedCategory } from "../../controllers/selected-category";
 
 const tableHeader = {
   cells: [

@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import DynamicTable from "@atlaskit/dynamic-table";
-import { useCategories } from "../../service/categories";
+import { useCategories } from "../../services/categories";
 import { Category, CategoryId } from "../../types/category";
 import { ErrorMessage } from "../error-message";
-import { useSelectedCategory } from "../../service/selected-category";
+import { useSelectedCategory } from "../../controllers/selected-category";
 
 const tableHeader = {
   cells: [

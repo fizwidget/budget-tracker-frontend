@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 import { TRANSACTION_FIELDS } from "../transactions/gql";
 
 export const UPLOAD_TRANSACTIONS = gql`

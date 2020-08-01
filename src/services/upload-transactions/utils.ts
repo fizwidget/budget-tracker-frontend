@@ -1,11 +1,10 @@
-import { MutationResult } from "@apollo/react-common";
-import { FetchResult } from "apollo-boost";
-import { DataProxy } from "apollo-cache";
+import { FetchResult, MutationResult, DataProxy } from "@apollo/client";
 import {
-  ServiceQueryResult,
+  ServiceMutationState,
   loading,
   failure,
   success,
+  notRunning,
 } from "../../types/service-result";
 import { UploadTransactions } from "./__generated__/UploadTransactions";
 import {
@@ -16,20 +15,20 @@ import { TRANSACTIONS_QUERY } from "../transactions/gql";
 
 export const transformResult = (
   result: MutationResult<UploadTransactions>
-): ServiceQueryResult<void> => {
+): ServiceMutationState<void> => {
   if (result.loading) {
     return loading();
   }
   if (result.error) {
     return failure(result.error);
   }
-  if (result.data?.recordTransactions?.success) {
+  if (result.data?.recordTransactions?.success === true) {
     return success(undefined);
   }
-  if (result.data === undefined) {
-    return loading();
+  if (result.data?.recordTransactions?.success === false) {
+    return failure(Error(result.data?.recordTransactions?.message));
   }
-  return failure(Error(result.data?.recordTransactions?.message));
+  return notRunning();
 };
 
 export const updateCache = (

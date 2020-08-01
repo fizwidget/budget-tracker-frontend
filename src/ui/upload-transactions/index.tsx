@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 import Button from "@atlaskit/button";
-import { useUpload } from "../../service/upload-transactions";
+import { useUpload } from "../../services/upload-transactions";
 import { createOnFileInputChange } from "./utils";
 import { ErrorMessage } from "../error-message";
 
@@ -15,7 +15,11 @@ export const UploadTransactions = () => {
           error={result.error}
         />
       )}
-      <Button type="file" onClick={() => fileInputRef.current?.click()}>
+      <Button
+        type="file"
+        isLoading={result.loading}
+        onClick={() => fileInputRef.current?.click()}
+      >
         Upload CSV
       </Button>
       <input

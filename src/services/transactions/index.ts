@@ -1,8 +1,9 @@
-import { useQuery } from "@apollo/react-hooks";
-import { TRANSACTIONS_QUERY } from "./gql";
+import { useQuery } from "@apollo/client";
+
 import { ServiceQueryResult } from "../../types/service-result";
 import { Transaction } from "../../types/transaction";
 import { CategoryId } from "../../types/category";
+import { TRANSACTIONS_QUERY } from "./gql";
 import { transformResult } from "./utils";
 import {
   GetTransactions,
