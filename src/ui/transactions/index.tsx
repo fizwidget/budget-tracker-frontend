@@ -23,6 +23,7 @@ const toTableRows = (transactions: Transaction[]) =>
       { content: description },
       { content: formatCurrency(amount) },
       {
+        // Need to allow categorisation here!
         content:
           category.tag === "uncategorised"
             ? "Uncategorised"

@@ -7,12 +7,7 @@ import { ErrorMessage } from "../error-message";
 import { useSelectedCategory } from "../../controllers/selected-category";
 
 const tableHeader = {
-  cells: [
-    { content: "Description", shouldTruncate: true },
-    { content: "Amount" },
-    { content: "Category" },
-    { content: "Account" },
-  ],
+  cells: [{ content: "Description", shouldTruncate: true }],
 };
 
 interface TableRowProps {

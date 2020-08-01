@@ -35,8 +35,6 @@ export const updateCache = (
   proxy: DataProxy,
   mutationResult: FetchResult<UploadTransactions>
 ) => {
-  debugger;
-
   // The new transactions should be returned if:
   // - We query for *all* transactions.
   // - We query for uncategorised transactions (null).
