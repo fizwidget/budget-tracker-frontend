@@ -31,6 +31,9 @@ export const useCategoriseTransaction = (): ServiceMutationResult<
           transactionId,
         },
       },
+      // TODO: Update cache! Need to insert this transaction into the
+      // list of transactions for the category. And remove it from the
+      // old list? Sounds complicated - re-run whole query instead?
     });
   };
 
