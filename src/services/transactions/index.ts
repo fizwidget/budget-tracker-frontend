@@ -17,16 +17,16 @@ interface Filter {
 export const useTransactions = (
   filter: Filter
 ): ServiceQueryResult<Transaction[]> => {
+  const variables = {
+    filter: {
+      ...(filter.categoryIds ? { categories: filter.categoryIds } : {}),
+    },
+  };
+
   const result = useQuery<GetTransactions, GetTransactionsVariables>(
     TRANSACTIONS_QUERY,
-    {
-      variables: {
-        filter: {
-          ...(filter.categoryIds ? { categories: filter.categoryIds } : {}),
-        },
-      },
-    }
+    { variables }
   );
-  console.log(result.client.cache);
+
   return transformResult(result);
 };

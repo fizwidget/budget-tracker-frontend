@@ -6,7 +6,7 @@
     "start": "node scripts/start.js",
     "build": "yarn schema:types:generate && node scripts/build.js",
     "test": "node scripts/test.js",
-    "schema:download": "apollo client:download-schema --endpoint=http://localhost:8080/graphql",
+    "clean": "find src -name '__generated__' -type d -delete",
     "schema:types:generate": "apollo client:codegen --target=typescript",
     "schema:types:watch": "yarn schema:types:generate --watch"
   },
@@ -17,7 +17,6 @@
     "@atlaskit/page": "^11.0.13",
     "@atlaskit/page-header": "^9.0.19",
     "@atlaskit/section-message": "^4.1.9",
-    "@atlaskit/select": "^12.0.1",
     "@babel/core": "7.9.6",
     "@emotion/core": "^10.0.28",
     "@svgr/webpack": "5.4.0",

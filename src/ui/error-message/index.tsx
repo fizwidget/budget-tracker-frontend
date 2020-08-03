@@ -25,8 +25,8 @@ export const ErrorMessage = ({ title, error }: Props) => {
       {networkError?.message ?? error.message}
       {graphQLErrors && (
         <ul>
-          {graphQLErrors.map(({ message }) => (
-            <li>{message}</li>
+          {graphQLErrors.map(({ message }, index) => (
+            <li key={index}>{message}</li>
           ))}
         </ul>
       )}

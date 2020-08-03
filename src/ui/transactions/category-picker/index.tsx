@@ -1,23 +1,51 @@
-import React from "react";
-// import Select from "@atlaskit/select";
+import React, { ChangeEvent } from "react";
 import { useCategories } from "../../../services/categories";
-import { CategoryId } from "../../../types/category";
+import { toCategoryId, CategoryId } from "../../../types/category";
+import { useCategoriseTransaction } from "../../../services/categorise-transaction";
+import { TransactionId } from "../../../types/transaction";
+import { useTransaction } from "../../../services/transaction";
+import { ErrorMessage } from "../../error-message";
 
 interface Props {
-  currentCategory: CategoryId | null;
+  transactionId: TransactionId;
 }
 
-export const CategoryPicker = (props: Props) => {
+export const CategoryPicker = ({ transactionId }: Props) => {
+  const transaction = useTransaction(transactionId);
   const { data: categories = [] } = useCategories();
+  const [
+    categoriseTransaction,
+    categoriseTransactionResult,
+  ] = useCategoriseTransaction();
 
-  const selectOptions = categories.map((category) => ({
-    value: category.id,
-    label: category.name,
-  }));
+  const currentValue: CategoryId | undefined =
+    transaction.category.tag === "categorised"
+      ? transaction.category.value.id
+      : undefined;
 
-  // const onChange = ({value: categoryId}) => {
+  const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    const categoryId =
+      value === "none" ? null : toCategoryId(event.target.value);
+    categoriseTransaction({ categoryId, transactionId });
+  };
 
-  // }
-
-  // return <Select options={selectOptions} placeholder="Uncategorised" />;
+  return (
+    <>
+      {categoriseTransactionResult.error && (
+        <ErrorMessage
+          title="Categorisation error"
+          error={categoriseTransactionResult.error}
+        />
+      )}
+      <select value={currentValue} onChange={onChange}>
+        <option key="none">None</option>
+        {categories.map(({ id, name }) => (
+          <option key={id} value={id}>
+            {name}
+          </option>
+        ))}
+      </select>
+    </>
+  );
 };

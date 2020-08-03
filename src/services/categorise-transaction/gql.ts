@@ -11,6 +11,6 @@ export const CATEGORISE_TRANSACTION_MUTATION = gql`
         ...TransactionFields
       }
     }
-    ${TRANSACTION_FIELDS}
   }
+  ${TRANSACTION_FIELDS}
 `;

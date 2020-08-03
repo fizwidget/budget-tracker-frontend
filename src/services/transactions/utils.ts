@@ -30,7 +30,7 @@ const transformCategory = (
   name: input.name,
 });
 
-const transformTransaction = (
+export const transformTransaction = (
   input: GetTransactions_transactions
 ): Transaction => {
   if (input.account === null) {

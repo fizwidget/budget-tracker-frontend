@@ -10,8 +10,8 @@ import {
 import { transformResult } from "./utils";
 
 interface Input {
-  categoryId: CategoryId;
   transactionId: TransactionId;
+  categoryId: CategoryId | null;
 }
 
 export const useCategoriseTransaction = (): ServiceMutationResult<
