@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { useCategories } from "../../../services/categories";
-import { toCategoryId, CategoryId } from "../../../types/category";
+import { toCategoryId } from "../../../types/category";
 import { useCategoriseTransaction } from "../../../services/categorise-transaction";
 import { TransactionId } from "../../../types/transaction";
 import { useTransaction } from "../../../services/transaction";
@@ -18,10 +18,10 @@ export const CategoryPicker = ({ transactionId }: Props) => {
     categoriseTransactionResult,
   ] = useCategoriseTransaction();
 
-  const currentValue: CategoryId | undefined =
+  const currentValue: string =
     transaction.category.tag === "categorised"
       ? transaction.category.value.id
-      : undefined;
+      : "none";
 
   const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
@@ -39,7 +39,9 @@ export const CategoryPicker = ({ transactionId }: Props) => {
         />
       )}
       <select value={currentValue} onChange={onChange}>
-        <option key="none">None</option>
+        <option key="none" value="none">
+          None
+        </option>
         {categories.map(({ id, name }) => (
           <option key={id} value={id}>
             {name}
